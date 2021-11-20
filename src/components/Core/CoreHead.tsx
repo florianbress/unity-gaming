@@ -1,13 +1,15 @@
 import Head from "next/head";
 import React from "react";
 
-interface CoreHeadProps {}
+interface CoreHeadProps {
+  title: string;
+}
 
 const CoreHead = (props: CoreHeadProps) => {
   return (
     <Head>
-      <title>Unity Gaming</title>
-      <link rel="icon" href="/favicon.ico" />
+      <title>{props.title}</title>
+      <link rel="icon" href="/img/favicon.ico" />
     </Head>
   );
 };

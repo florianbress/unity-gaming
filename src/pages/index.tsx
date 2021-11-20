@@ -6,13 +6,15 @@ import TopNavigation from "../components/Navigation/TopNavigation";
 export default function Home() {
   return (
     <div>
-      <CoreHead />
+      <CoreHead title="News Feed" />
       <div className="flex">
-        <Sidebar expanded={true} />
-        <div>
+        <Sidebar expanded={true} actionEnabled={false} />
+        <div className="flex flex-col flex-1 w-screen h-screen">
           <TopNavigation />
-          <div>
-            <p>content </p>
+          <div className="overflow-scroll scrollbar-hide bg-dashboardBackground">
+            <div className="" style={{ height: "1500px" }}>
+              <p className="font-semibold text-white font-inter">Content</p>
+            </div>
           </div>
         </div>
       </div>

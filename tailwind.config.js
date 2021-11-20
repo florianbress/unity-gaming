@@ -6,14 +6,19 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      inter: ["Inter"],
+    },
     extend: {
       colors: {
         dashboardBackground: "#1F2128",
+        textDeactive: "#808191",
+        textActive: "#FFFFFF",
       },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 };

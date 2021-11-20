@@ -3,99 +3,180 @@ import Image from "next/image";
 
 interface SidebarProps {
   expanded: boolean;
+  actionEnabled: boolean;
 }
 
 const NewsEntry = [
-  { name: "New Feed", icon: "" },
-  { name: "Trending", icon: "" },
-  { name: "Following", icon: "" },
-  { name: "Your Videos", icon: "" },
-  { name: "Playlist", icon: "" },
+  {
+    icon: "/icons/game-play.svg",
+    name: "New Feed",
+    action: "/img/icon/Arrow.svg",
+  },
+  {
+    icon: "/icons/trending.svg",
+    name: "Trending",
+    action: "/img/icon/Arrow.svg",
+  },
+  {
+    icon: "/icons/profile.svg",
+    name: "Following",
+    action: "/img/icon/Arrow.svg",
+  },
+  {
+    icon: "/icons/camera.svg",
+    name: "Your Videos",
+    action: "/img/icon/RoundedPlus.svg",
+  },
+  {
+    icon: "/icons/document.svg",
+    name: "Playlist",
+    action: "/img/icon/Arrow.svg",
+  },
 ];
 
 const FollowingMockData = [
   {
-    image: "/img/avatars/avatar.svg",
+    image: "/img/ava-1.png",
     username: "Dylan Hodges",
-    icon: "/img/live-icon.svg",
+    icon: "/img/icon/live-icon.svg",
   },
   {
-    image: "/img/avatars/avatar-1.svg",
+    image: "/img/ava-2.png",
     username: "Vincent Parks",
     icon: "/img/icon/notification-simple-small.svg",
   },
   {
-    image: "/img/avatars/avatar-2.svg",
+    image: "/img/ava-3.png",
     username: "Richard Bowers",
-    icon: "/img/live-icon.svg",
+    icon: "/img/icon/live-icon.svg",
   },
   {
-    image: "/img/avatars/avatar-3.svg",
+    image: "/img/ava-4.png",
     username: "Isaac Lambert",
-    icon: "/img/live-icon.svg",
+    icon: "/img/icon/live-icon.svg",
   },
   {
-    image: "/img/avatars/avatar-4.svg",
+    image: "/img/ava-2.png",
     username: "Lillie Nash",
     icon: "/img/icon/notification-simple-small.svg",
   },
   {
-    image: "/img/avatars/avatar-5.svg",
+    image: "/img/ava-5.png",
     username: "Edith Cain",
-    icon: "/img/live-icon.svg",
+    icon: "/img/icon/live-icon.svg",
   },
   {
-    image: "/img/avatars/avatar-4.svg",
+    image: "/img/ava-1.png",
     username: "Jerry Shermany",
-    icon: "/img/notification-simple-small.svg",
+    icon: "/img/icon/notification-simple-small.svg",
   },
 ];
 
 const Sidebar = (props: SidebarProps) => {
   return (
-    <div className="h-screen bg-black w-52">
+    <div className="sticky w-64 h-screen overflow-scroll shadow-inner bg-dashboardBackground scrollbar-hide">
       {/* Header Section */}
-      <div className="h-16 bg-red-900 w-52">
-        <p>Header</p>
-      </div>
+      <div className="relative w-full h-screen pl-5 pr-8">
+        <div className="p-5 h-1/7">
+          <div className="flex items-center justify-center h-24 space-x-3">
+            <button className="hover:curso/r-pointer">
+              <Image src="/img/logo-white.svg" width="141px" height="32px" />
+            </button>
+            <button className="hover:cursor-pointer">
+              <Image src="/icons/burger-icon.svg" width="32px" height="32px" />
+            </button>
+          </div>
+        </div>
 
-      {/* News Feed */}
-      <div className="bg-green-900 h-2/6">
-        <p>News Feed</p>
-        {NewsEntry.map((e) => {
-          <div className="flex">
-            <p>{e.name}</p>
-          </div>;
-        })}
-      </div>
+        {/* News Feed */}
+        <div className="mb-2 h-2/7">
+          <p className="p-3 text-xs font-medium text-textDeactive font-inter">
+            New Feeds
+          </p>
+          {NewsEntry.map((e) => {
+            return (
+              <div
+                className="flex items-center p-1 mb-3"
+                key={e.name + "_newsnavigation"}
+              >
+                <div className="pl-2 pr-4">
+                  <Image src={e.icon} width="24px" height="24px" />
+                </div>
+                <p className="text-sm font-semibold font-inter text-textDeactive">
+                  {e.name}
+                </p>
+                <div className={`p-2 ${!props.actionEnabled ? "hidden" : ""}`}>
+                  <Image src={e.action} width="24px" height="24px" />
+                </div>
+              </div>
+            );
+          })}
+        </div>
 
-      {/* Following Section*/}
-      <div className="bg-blue-900 h-2/6">
-        {FollowingMockData.map((e) => {
-          return (
-            <div className="flex">
-              <Image src={e.image} width="24px" height="24px" />
-              <p>{e.username}</p>
-              <Image src={e.icon} width="24px" height="24px" />
+        {/* Divider */}
+        <hr className="my-10 border-t-2 border-trueGray-200 border-opacity-10 " />
+
+        {/* Following Section*/}
+        <div className="mb-2 h-3/7">
+          <p className="p-3 text-xs font-medium text-textDeactive font-inter">
+            Following
+          </p>
+          {FollowingMockData.map((e) => {
+            return (
+              <div
+                className="flex items-center p-1 mb-3 space-x-2"
+                key={e.username + "_followingnavigation"}
+              >
+                <div className="pl-2">
+                  <Image src={e.image} width="24px" height="24px" />
+                </div>
+                <p className="text-sm font-semibold font-inter text-textDeactive">
+                  {e.username}
+                </p>
+                <div className="">
+                  <Image src={e.icon} width="24px" height="24px" />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Divider */}
+        <hr className="my-10 border-t-2 border-trueGray-200 border-opacity-10 " />
+
+        {/* Site Section */}
+        <div className="h-3/6">
+          <p className="p-3 text-xs font-medium text-textDeactive font-inter">
+            Unity Gaming
+          </p>
+
+          <div className="flex p-1 mb-3 space-x-2">
+            <div className="pl-2">
+              <Image src="/img/icon/Chat.svg" width="24px" height="24px" />
             </div>
-          );
-        })}
-        <p>Following</p>
-      </div>
+            <p className="text-sm font-semibold font-inter text-textDeactive">
+              Chat
+            </p>
+          </div>
+          <div className="flex p-1 mb-3 space-x-2">
+            <div className="pl-2">
+              <Image src="/img/icon/Setting.svg" width="24px" height="24px" />
+            </div>
+            <p className="text-sm font-semibold font-inter text-textDeactive">
+              Settings
+            </p>
+          </div>
+        </div>
 
-      {/* Site Section */}
-      <div className="bg-yellow-900 h-3/6">
-        <p>Site</p>
-      </div>
+        {/* Banner Section */}
+        <div className="bg-indigo-900 h-2/6">
+          <p>Banner </p>
+        </div>
 
-      {/* Banner Section */}
-      <div className="bg-indigo-900 h-2/6">
-        <p>Banner </p>
-      </div>
-
-      {/* Theme Section */}
-      <div className="h-16 bg-purple-900">
-        <p>theme</p>
+        {/* Theme Section */}
+        <div className="h-16 bg-purple-900">
+          <p>theme</p>
+        </div>
       </div>
     </div>
   );
